@@ -68,6 +68,7 @@ def file_editing():
                     delete_sheets(workbook, sheets_to_delete)
                     global_settings_sheet["A6"] = "Live Response - Endpoint"
                     global_settings_sheet["A7"] = "Live Response - Server"
+                    remove_hyperlinks(global_settings_sheet, ["A6", "A7"])
                 if st.sidebar.checkbox("Endpoint + Server"):
                     delete_sheets(workbook, sheets_to_delete)
                     clear_rows(global_settings_sheet, 6, 7)
