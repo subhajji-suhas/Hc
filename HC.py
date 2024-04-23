@@ -64,18 +64,20 @@ def file_editing():
                 global_settings_sheet.title = "General Settings"
                 global_settings_sheet["A1"] = "General Settings"
 
-                if st.sidebar.checkbox("All the Below"):
+                if st.sidebar.checkbox("Endpoint + Server Complete"):
                     delete_sheets(workbook, sheets_to_delete)
                     global_settings_sheet["A6"] = "Live Response - Endpoint"
                     global_settings_sheet["A7"] = "Live Response - Server"
-                    
+                if st.sidebar.checkbox("Endpoint + Server"):
+                    delete_sheets(workbook, sheets_to_delete)
+                    clear_rows(global_settings_sheet, 6, 7)
                     remove_hyperlinks(global_settings_sheet, ["A6", "A7"])
                 if st.sidebar.checkbox("Endpoint License"):
                     clear_rows(global_settings_sheet, 6, 7)
-
+                    delete_sheets(workbook, [sheet_name for sheet_name in workbook.sheetnames if "server" in sheet_name.lower()])
                 if st.sidebar.checkbox("Server License"):
                     clear_rows(global_settings_sheet, 6, 7)
-
+                    delete_sheets(workbook, [sheet_name for sheet_name in workbook.sheetnames if "endpoint" in sheet_name.lower()])
                 if st.sidebar.checkbox("Endpoint License - Complete"):
                     global_settings_sheet["A6"] = "Live Response - Endpoint"
                     clear_rows(global_settings_sheet, 7, 7)
